@@ -1,0 +1,49 @@
+{
+  "meta": {},
+  "commands": [
+    {
+      "command": "text",
+      "args": [
+        "This is talk style text command.\n(and multiline text.)",
+        {
+          "name": "rutan"
+        }
+      ],
+      "loc": {
+        "start": {
+          "offset": 9,
+          "line": 4,
+          "column": 1
+        },
+        "end": {
+          "offset": 75,
+          "line": 7,
+          "column": 1
+        }
+      }
+    },
+    {
+      "id": "talk-command-id",
+      "command": "text",
+      "args": [
+        "This is talk style text command with id and parameters.",
+        {
+          "name": "rutan",
+          "face": "smile"
+        }
+      ],
+      "loc": {
+        "start": {
+          "offset": 76,
+          "line": 8,
+          "column": 1
+        },
+        "end": {
+          "offset": 175,
+          "line": 11,
+          "column": 1
+        }
+      }
+    }
+  ]
+}

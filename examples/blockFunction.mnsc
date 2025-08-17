@@ -1,0 +1,20 @@
+---
+---
+
+<<<simpleBlock()>>>
+  Simple text inside block.
+  Another line.
+<<</simpleBlock>>>
+
+<<<blockWithArgs("arg1", 42)>>>
+  Text with arguments.
+<<</blockWithArgs>>>
+
+<<<nestedBlock()>>>
+  Outer block content.
+  <<<innerBlock("nested")>>>
+    Inner block content.
+    More inner content.
+  <<</innerBlock>>>
+  Back to outer content.
+<<</nestedBlock>>>

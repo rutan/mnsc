@@ -1,0 +1,253 @@
+{
+  "meta": {},
+  "commands": [
+    {
+      "command": "choices",
+      "args": [],
+      "children": [
+        {
+          "id": "choice01",
+          "command": "item",
+          "args": [
+            "Choice 1",
+            {
+              "label": "label1"
+            }
+          ],
+          "loc": {}
+        },
+        {
+          "id": "choice02",
+          "command": "item",
+          "args": [
+            "Choice 2",
+            {
+              "label": "label2"
+            }
+          ],
+          "loc": {}
+        },
+        {
+          "id": "choice03",
+          "command": "item",
+          "args": [
+            "Choice 3 [small]（if love over 10）[/small]",
+            {
+              "label": "label3",
+              "condition": {
+                "type": "comparison",
+                "operator": ">=",
+                "left": {
+                  "type": "variable",
+                  "name": "love"
+                },
+                "right": {
+                  "type": "number",
+                  "value": 10
+                }
+              },
+              "alwaysVisible": true
+            }
+          ],
+          "loc": {}
+        },
+        {
+          "id": "choice04",
+          "command": "item",
+          "args": [
+            "Complex choice 4",
+            {
+              "label": "label4",
+              "condition": {
+                "type": "logical",
+                "operator": "&&",
+                "left": {
+                  "type": "comparison",
+                  "operator": ">",
+                  "left": {
+                    "type": "variable",
+                    "name": "level"
+                  },
+                  "right": {
+                    "type": "number",
+                    "value": 5
+                  }
+                },
+                "right": {
+                  "type": "comparison",
+                  "operator": ">=",
+                  "left": {
+                    "type": "variable",
+                    "name": "experience"
+                  },
+                  "right": {
+                    "type": "number",
+                    "value": 100
+                  }
+                }
+              }
+            }
+          ],
+          "loc": {}
+        },
+        {
+          "id": "choice05",
+          "command": "item",
+          "args": [
+            "Complex choice 5",
+            {
+              "label": "label5",
+              "condition": {
+                "type": "logical",
+                "operator": "||",
+                "left": {
+                  "type": "comparison",
+                  "operator": "<=",
+                  "left": {
+                    "type": "variable",
+                    "name": "health"
+                  },
+                  "right": {
+                    "type": "number",
+                    "value": 50
+                  }
+                },
+                "right": {
+                  "type": "logical",
+                  "operator": "&&",
+                  "left": {
+                    "type": "comparison",
+                    "operator": ">",
+                    "left": {
+                      "type": "variable",
+                      "name": "mana"
+                    },
+                    "right": {
+                      "type": "number",
+                      "value": 20
+                    }
+                  },
+                  "right": {
+                    "type": "comparison",
+                    "operator": "!=",
+                    "left": {
+                      "type": "variable",
+                      "name": "stamina"
+                    },
+                    "right": {
+                      "type": "number",
+                      "value": 0
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "loc": {}
+        },
+        {
+          "id": "choice06",
+          "command": "item",
+          "args": [
+            "String comparison choice 6",
+            {
+              "label": "label6",
+              "condition": {
+                "type": "comparison",
+                "operator": "==",
+                "left": {
+                  "type": "variable",
+                  "name": "name"
+                },
+                "right": {
+                  "type": "string",
+                  "value": "player"
+                }
+              }
+            }
+          ],
+          "loc": {}
+        }
+      ],
+      "loc": {}
+    },
+    {
+      "command": "label",
+      "args": [
+        "label1"
+      ],
+      "loc": {}
+    },
+    {
+      "command": "text",
+      "args": [
+        "Normal End."
+      ],
+      "loc": {}
+    },
+    {
+      "command": "exit",
+      "args": [],
+      "loc": {}
+    },
+    {
+      "command": "label",
+      "args": [
+        "label2"
+      ],
+      "loc": {}
+    },
+    {
+      "command": "text",
+      "args": [
+        "Bad End."
+      ],
+      "loc": {}
+    },
+    {
+      "command": "exit",
+      "args": [],
+      "loc": {}
+    },
+    {
+      "command": "label",
+      "args": [
+        "label3"
+      ],
+      "loc": {}
+    },
+    {
+      "command": "label",
+      "args": [
+        "label4"
+      ],
+      "loc": {}
+    },
+    {
+      "command": "label",
+      "args": [
+        "label5"
+      ],
+      "loc": {}
+    },
+    {
+      "command": "label",
+      "args": [
+        "label6"
+      ],
+      "loc": {}
+    },
+    {
+      "command": "text",
+      "args": [
+        "Good End."
+      ],
+      "loc": {}
+    },
+    {
+      "command": "exit",
+      "args": [],
+      "loc": {}
+    }
+  ]
+}

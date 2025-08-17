@@ -1,0 +1,44 @@
+---
+---
+
+<<<choices()>>>
+  #id:choice01
+  - Choice 1 => *label1
+  #id:choice02
+  - Choice 2
+    => *label2
+  #id:choice03
+  - [if($love >= 10, alwaysVisible: true)]:
+    Choice 3 [small]（if love over 10）[/small]
+    => *label3
+  #id:choice04
+  - [if($level > 5 && $experience >= 100)]:
+    Complex choice 4
+    => *label4
+  #id:choice05
+  - [if($health <= 50 || ($mana > 20 && $stamina != 0))]:
+    Complex choice 5
+    => *label5
+  #id:choice06
+  - [if($name == "player")]:
+    String comparison choice 6
+    => *label6
+<<</choices>>>
+
+*label1
+Normal End.
+
+<<exit()>>
+
+*label2
+Bad End.
+
+<<exit()>>
+
+*label3
+*label4
+*label5
+*label6
+Good End.
+
+<<exit()>>

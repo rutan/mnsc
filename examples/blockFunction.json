@@ -1,0 +1,71 @@
+{
+  "meta": {},
+  "commands": [
+    {
+      "command": "simpleBlock",
+      "args": [],
+      "children": [
+        {
+          "command": "text",
+          "args": [
+            "Simple text inside block.\nAnother line."
+          ],
+          "loc": {}
+        }
+      ],
+      "loc": {}
+    },
+    {
+      "command": "blockWithArgs",
+      "args": [
+        "arg1",
+        42
+      ],
+      "children": [
+        {
+          "command": "text",
+          "args": [
+            "Text with arguments."
+          ],
+          "loc": {}
+        }
+      ],
+      "loc": {}
+    },
+    {
+      "command": "nestedBlock",
+      "args": [],
+      "children": [
+        {
+          "command": "text",
+          "args": [
+            "Outer block content."
+          ],
+          "loc": {}
+        },
+        {
+          "command": "innerBlock",
+          "args": ["nested"],
+          "children": [
+            {
+              "command": "text",
+              "args": [
+                "Inner block content.\nMore inner content."
+              ],
+              "loc": {}
+            }
+          ],
+          "loc": {}
+        },
+        {
+          "command": "text",
+          "args": [
+            "Back to outer content."
+          ],
+          "loc": {}
+        }
+      ],
+      "loc": {}
+    }
+  ]
+}

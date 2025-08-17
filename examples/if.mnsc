@@ -1,0 +1,20 @@
+---
+---
+
+<<<if($hp == 0)>>>
+  Your life is zero.
+<<</if>>>
+
+<<<if($love >= 10)>>>
+  Love Power!
+<<<else>>>
+  Hatred :(
+<<</if>>>
+
+<<<if($level >= 100)>>>
+  Champion!
+<<<elsif($level >= 10)>>>
+  Good!
+<<<else>>>
+  Welcome!
+<<</if>>>

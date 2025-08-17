@@ -1,0 +1,10 @@
+---
+---
+
+rutan:
+  This is talk style text command.
+  (and multiline text.)
+
+#id:talk-command-id
+rutan: face: 'smile'
+  This is talk style text command with id and parameters.

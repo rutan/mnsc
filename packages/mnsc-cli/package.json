@@ -1,0 +1,40 @@
+{
+  "name": "@rutan/mnsc-cli",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "CLI tool for MNSC parser",
+  "author": "ru_shalm <ru_shalm@hazimu.com>",
+  "license": "MIT",
+  "keywords": [],
+  "homepage": "https://github.com/rutan/mnsc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rutan/mnsc"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "mnsc": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@rutan/mnsc": "workspace:*",
+    "chalk": "^5.6.0",
+    "chokidar": "^4.0.3",
+    "commander": "^14.0.0",
+    "glob": "^11.0.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

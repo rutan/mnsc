@@ -1,0 +1,34 @@
+---
+---
+
+<<noArgsCommand()>>
+
+<<stringArgCommand("string arg0")>>
+<<stringArgsCommand("string arg0 ☺️", 'string ' + 'arg1')>>
+
+<<numberArgCommand(123)>>
+<<numberArgsCommand(-456, +789.0)>>
+
+<<booleanArgCommand(true)>>
+<<booleanArgsCommand(false, true)>>
+<<booleanArgWithVariableCommand($love >= 10)>>
+
+<<arithmeticCommand(10 * 3)>>
+<<additionCommand(5 + 2)>>
+<<complexArithmeticCommand(10 + 5 * 2)>>
+<<variableArithmeticCommand($level + 10)>>
+<<parenthesesCommand(($base + $bonus) * 2)>>
+
+<<comparisonCommand(3 < 10)>>
+<<comparisonWithArithmeticCommand($health > ($max / 2))>>
+
+<<parameterCommand(param1: 'string', param2: 0.5)>>
+
+<<mixArgsCommand(
+  "string\nstring",
+  123,
+  true,
+  optionStr: 'string',
+  optionNumber: -432.1,
+  optionBoolean: false
+)>>

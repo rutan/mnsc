@@ -1,0 +1,195 @@
+{
+  "meta": {},
+  "commands": [
+    {
+      "command": "noArgsCommand",
+      "args": [],
+      "loc": {}
+    },
+    {
+      "command": "stringArgCommand",
+      "args": [
+        "string arg0"
+      ],
+      "loc": {}
+    },
+    {
+      "command": "stringArgsCommand",
+      "args": [
+        "string arg0 ☺️",
+        "string arg1"
+      ],
+      "loc": {}
+    },
+    {
+      "command": "numberArgCommand",
+      "args": [
+        123
+      ],
+      "loc": {}
+    },
+    {
+      "command": "numberArgsCommand",
+      "args": [
+        -456,
+        789
+      ],
+      "loc": {}
+    },
+    {
+      "command": "booleanArgCommand",
+      "args": [
+        true
+      ],
+      "loc": {}
+    },
+    {
+      "command": "booleanArgsCommand",
+      "args": [
+        false,
+        true
+      ],
+      "loc": {}
+    },
+    {
+      "command": "booleanArgWithVariableCommand",
+      "args": [
+        {
+          "left": {
+            "name": "love",
+            "type": "variable"
+          },
+          "operator": ">=",
+          "right": {
+            "type": "number",
+            "value": 10
+          },
+          "type": "comparison"
+        }
+      ],
+      "loc": {}
+    },
+    {
+      "command": "arithmeticCommand",
+      "args": [
+        30
+      ],
+      "loc": {}
+    },
+    {
+      "command": "additionCommand",
+      "args": [
+        7
+      ],
+      "loc": {}
+    },
+    {
+      "command": "complexArithmeticCommand",
+      "args": [
+        20
+      ],
+      "loc": {}
+    },
+    {
+      "command": "variableArithmeticCommand",
+      "args": [
+        {
+          "left": {
+            "name": "level",
+            "type": "variable"
+          },
+          "operator": "+",
+          "right": {
+            "type": "number",
+            "value": 10
+          },
+          "type": "arithmetic"
+        }
+      ],
+      "loc": {}
+    },
+    {
+      "command": "parenthesesCommand",
+      "args": [
+        {
+          "left": {
+            "left": {
+              "name": "base",
+              "type": "variable"
+            },
+            "operator": "+",
+            "right": {
+              "name": "bonus",
+              "type": "variable"
+            },
+            "type": "arithmetic"
+          },
+          "operator": "*",
+          "right": {
+            "type": "number",
+            "value": 2
+          },
+          "type": "arithmetic"
+        }
+      ],
+      "loc": {}
+    },
+    {
+      "command": "comparisonCommand",
+      "args": [
+        true
+      ],
+      "loc": {}
+    },
+    {
+      "command": "comparisonWithArithmeticCommand",
+      "args": [
+        {
+          "left": {
+            "name": "health",
+            "type": "variable"
+          },
+          "operator": ">",
+          "right": {
+            "left": {
+              "name": "max",
+              "type": "variable"
+            },
+            "operator": "/",
+            "right": {
+              "type": "number",
+              "value": 2
+            },
+            "type": "arithmetic"
+          },
+          "type": "comparison"
+        }
+      ],
+      "loc": {}
+    },
+    {
+      "command": "parameterCommand",
+      "args": [
+        {
+          "param1": "string",
+          "param2": 0.5
+        }
+      ],
+      "loc": {}
+    },
+    {
+      "command": "mixArgsCommand",
+      "args": [
+        "string\nstring",
+        123,
+        true,
+        {
+          "optionBoolean": false,
+          "optionNumber": -432.1,
+          "optionStr": "string"
+        }
+      ],
+      "loc": {}
+    }
+  ]
+}

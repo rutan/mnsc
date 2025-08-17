@@ -1,0 +1,140 @@
+{
+  "meta": {},
+  "commands": [
+    {
+      "command": "if",
+      "args": [],
+      "branches": [
+        {
+          "condition": {
+            "type": "comparison",
+            "left": {
+              "type": "variable",
+              "name": "hp"
+            },
+            "operator": "==",
+            "right": {
+              "type": "number",
+              "value": 0
+            }
+          },
+          "children": [
+            {
+              "command": "text",
+              "args": [
+                "Your life is zero."
+              ],
+              "loc": {}
+            }
+          ]
+        }
+      ],
+      "loc": {}
+    },
+    {
+      "command": "if",
+      "args": [],
+      "branches": [
+        {
+          "condition": {
+            "type": "comparison",
+            "left": {
+              "type": "variable",
+              "name": "love"
+            },
+            "operator": ">=",
+            "right": {
+              "type": "number",
+              "value": 10
+            }
+          },
+          "children": [
+            {
+              "command": "text",
+              "args": [
+                "Love Power!"
+              ],
+              "loc": {}
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "command": "text",
+              "args": [
+                "Hatred :("
+              ],
+              "loc": {}
+            }
+          ]
+        }
+      ],
+      "loc": {}
+    },
+    {
+      "command": "if",
+      "args": [],
+      "branches": [
+        {
+          "condition": {
+            "type": "comparison",
+            "left": {
+              "type": "variable",
+              "name": "level"
+            },
+            "operator": ">=",
+            "right": {
+              "type": "number",
+              "value": 100
+            }
+          },
+          "children": [
+            {
+              "command": "text",
+              "args": [
+                "Champion!"
+              ],
+              "loc": {}
+            }
+          ]
+        },
+        {
+          "condition": {
+            "type": "comparison",
+            "left": {
+              "type": "variable",
+              "name": "level"
+            },
+            "operator": ">=",
+            "right": {
+              "type": "number",
+              "value": 10
+            }
+          },
+          "children": [
+            {
+              "command": "text",
+              "args": [
+                "Good!"
+              ],
+              "loc": {}
+            }
+          ]
+        },
+        {
+          "children": [
+            {
+              "command": "text",
+              "args": [
+                "Welcome!"
+              ],
+              "loc": {}
+            }
+          ]
+        }
+      ],
+      "loc": {}
+    }
+  ]
+}
