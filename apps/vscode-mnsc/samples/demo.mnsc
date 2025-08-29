@@ -1,0 +1,46 @@
+---
+title: sample
+description: 'sample'
+indexId: 123
+flag: false
+---
+
+// label and id will be inserted before text
+#id:672c3094-4741-4c7e-a35a-a1ed886adeae
+label: intro
+
+#id:7f891b37-f4f9-4ab9-94d3-ef706f11f46f
+rutan: face: 'smile'
+  Hello there!
+
+#id:ee43abca-9c29-4400-85d0-a486f2b070b6
+rutan: face: 'unknown'
+  unknown face...
+
+<<bg(color: 'black', duration: 300)>>
+
+<<testCommand()>>
+
+#id:6ce47337-d9a4-4cc9-ac10-00a46a24087f
+hain: face: 'angry'
+  Grrr...
+
+<<<if($hp == 0)>>>
+  Your life is zero.
+<<</if>>>
+
+<<<if($love >= 10)>>>
+  Love Power!
+<<<else>>>
+  Hatred :(
+<<</if>>>
+
+<<<if($level >= 100)>>>
+  Champion!
+<<<elsif($level >= 10)>>>
+  Good!
+<<<else>>>
+  Welcome!
+<<</if>>>
+
+<<playBgm("aaa", false)>>

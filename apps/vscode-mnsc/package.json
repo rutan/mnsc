@@ -133,6 +133,21 @@
           ],
           "default": "uuid",
           "description": "ID format used when generating message IDs."
+        },
+        "mnsc.diagnostics.warnUnknownFunctions": {
+          "type": "boolean",
+          "default": false,
+          "description": "Warn when a function call name is not listed in mnsc.functions."
+        },
+        "mnsc.diagnostics.warnUnknownCharacters": {
+          "type": "boolean",
+          "default": false,
+          "description": "Warn when a talk speaker name is not listed in mnsc.characters."
+        },
+        "mnsc.diagnostics.warnUnknownFaces": {
+          "type": "boolean",
+          "default": false,
+          "description": "Warn when a face value is not listed for the given character in mnsc.characters[].faces."
         }
       }
     }

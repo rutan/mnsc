@@ -1,0 +1,16 @@
+{
+  "mnsc.functions": [
+    { "name": "bg", "args": ["color", "duration"] },
+    { "name": "playBgm", "args": [{ "name": "id", "type": "string" }, { "name": "loop", "type": "boolean" }] },
+    { "name": "scene", "args": [{ "name": "name", "type": "string" }] }
+  ],
+  "mnsc.characters": [
+    { "name": "rutan", "faces": ["smile", "sad", "angry"] },
+    { "name": "hain", "faces": ["angry", "shy"] }
+  ],
+  "mnsc.generateIds.onSave": true,
+  "mnsc.generateIds.format": "uuid",
+  "mnsc.diagnostics.warnUnknownFunctions": true,
+  "mnsc.diagnostics.warnUnknownCharacters": true,
+  "mnsc.diagnostics.warnUnknownFaces": true
+}
