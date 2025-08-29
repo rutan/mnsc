@@ -1,4 +1,151 @@
 {
-  "name": "vscode-mnsc",
-  "private": true
+  "name": "@rutan/vscode-mnsc",
+  "displayName": "MNSC Language Support",
+  "description": "Syntax highlighting, completions, and ID tools for .mnsc files.",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "publisher": "rutan",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "icon": "",
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onLanguage:mnsc",
+    "onCommand:mnsc.generateIds"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "mnsc",
+        "aliases": [
+          "MNSC",
+          "mnsc"
+        ],
+        "extensions": [
+          ".mnsc"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "mnsc",
+        "scopeName": "source.mnsc",
+        "path": "./syntaxes/mnsc.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "mnsc.generateIds",
+        "title": "MNSC: Generate IDs in current file"
+      }
+    ],
+    "configuration": {
+      "title": "MNSC",
+      "properties": {
+        "mnsc.functions": {
+          "type": "array",
+          "default": [],
+          "description": "List of available functions and their argument keys.",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Function name (e.g., bg, playBgm)"
+              },
+              "args": {
+                "type": "array",
+                "description": "Named argument keys (either string or {name,type}).",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "name"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "string",
+                            "number",
+                            "boolean",
+                            "any"
+                          ],
+                          "default": "any"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "mnsc.characters": {
+          "type": "array",
+          "default": [],
+          "description": "Speaker names and their available faces for talk text.",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "faces": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": []
+              }
+            }
+          }
+        },
+        "mnsc.generateIds.onSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically insert message IDs on save for .mnsc files."
+        },
+        "mnsc.generateIds.format": {
+          "type": "string",
+          "enum": [
+            "uuid",
+            "hash"
+          ],
+          "default": "uuid",
+          "description": "ID format used when generating message IDs."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsup src/extension.ts --format esm --sourcemap --clean --out-dir dist --external vscode",
+    "dev": "tsup src/extension.ts --format esm --sourcemap --watch --out-dir dist --external vscode",
+    "lint": "biome check ./"
+  },
+  "dependencies": {
+    "@rutan/mnsc": "workspace:*"
+  },
+  "devDependencies": {
+    "vscode": "^1.1.37"
+  }
 }

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/vscode/tasks.json",
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "pnpm build",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "owner": "tsup",
+          "pattern": [
+            {
+              "regexp": ".*",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "Build start",
+            "endsPattern": "Build success"
+          }
+        }
+      ]
+    }
+  ]
+}

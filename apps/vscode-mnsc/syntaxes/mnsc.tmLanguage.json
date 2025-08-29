@@ -1,0 +1,113 @@
+{
+  "scopeName": "source.mnsc",
+  "name": "MNSC",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#frontMatterFence" },
+    { "include": "#ids" },
+    { "include": "#blockFunction" },
+    { "include": "#callFunction" },
+    { "include": "#talk" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.mnsc",
+          "match": "//.*$"
+        }
+      ]
+    },
+    "frontMatterFence": {
+      "patterns": [
+        {
+          "name": "meta.front-matter.mnsc",
+          "begin": "^---$",
+          "end": "^---$",
+          "patterns": [{ "include": "source.yaml" }]
+        }
+      ]
+    },
+    "ids": {
+      "patterns": [
+        {
+          "name": "entity.name.tag.id.mnsc",
+          "match": "^#id:[A-Za-z0-9_-]+$"
+        }
+      ]
+    },
+    "callFunction": {
+      "patterns": [
+        {
+          "name": "meta.function.call.mnsc",
+          "begin": "<<",
+          "end": ">>",
+          "patterns": [
+            {
+              "name": "entity.name.function.mnsc",
+              "match": "[A-Za-z_][A-Za-z0-9_]*"
+            },
+            {
+              "name": "variable.parameter.mnsc",
+              "match": "[A-Za-z_][A-Za-z0-9_]*(?=\\s*:)"
+            },
+            { "include": "#strings" },
+            { "include": "#numbers" }
+          ]
+        }
+      ]
+    },
+    "blockFunction": {
+      "patterns": [
+        {
+          "name": "meta.function.block.begin.mnsc",
+          "begin": "<<<",
+          "end": ">>>",
+          "patterns": [
+            { "name": "entity.name.function.mnsc", "match": "\/?[A-Za-z_][A-Za-z0-9_]*" },
+            { "name": "variable.parameter.mnsc", "match": "[A-Za-z_][A-Za-z0-9_]*(?=\\s*:)" },
+            { "include": "#strings" },
+            { "include": "#numbers" }
+          ]
+        }
+      ]
+    },
+    "talk": {
+      "patterns": [
+        {
+          "name": "meta.talk.line.mnsc",
+          "match": "^(?<name>[^:]+):",
+          "captures": {
+            "1": { "name": "entity.name.type.speaker.mnsc" }
+          }
+        },
+        {
+          "name": "variable.parameter.face.mnsc",
+          "match": "\\bface:\\s*"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.single.mnsc",
+          "begin": "'",
+          "end": "'",
+          "patterns": [{ "match": "\\\\.", "name": "constant.character.escape.mnsc" }]
+        },
+        {
+          "name": "string.quoted.double.mnsc",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [{ "match": "\\\\.", "name": "constant.character.escape.mnsc" }]
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        { "name": "constant.numeric.float.mnsc", "match": "[+-]?\\d+\\.\\d+" },
+        { "name": "constant.numeric.integer.mnsc", "match": "[+-]?\\d+" }
+      ]
+    }
+  }
+}
