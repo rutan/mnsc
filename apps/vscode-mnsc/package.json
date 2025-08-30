@@ -1,8 +1,8 @@
 {
   "name": "vscode-mnsc",
   "type": "module",
-  "version": "0.2.0",
-  "displayName": "MNSC Language Support",
+  "version": "0.2.1",
+  "displayName": "MNSC: Minimal Narrative Script Code",
   "description": "Syntax highlighting, completions, and ID tools for .mnsc files.",
   "private": true,
   "publisher": "rutan",
