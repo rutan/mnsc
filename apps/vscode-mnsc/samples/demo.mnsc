@@ -7,10 +7,10 @@ flag: false
 
 <<set($love, 10)>>
 
-#id:548b13c5-249d-4d3d-bb10-0fc9aa75fe3a
+#id:65481e9c-061f-4513-993c-1c9cf9feacd3
 へい
 
-#id:7f891b37-f4f9-4ab9-94d3-ef706f11f46f
+#id:5e6cb775-c95c-44d4-b78c-ab6a55569700
 rutan: face: 'smile', fade: true, duration: 30
   Hello there!
 
@@ -31,26 +31,26 @@ hain: face: 'angry'
   Grrr...
 
 <<<if($hp == 0)>>>
-  #id:b8759d55-1260-4a87-92ea-b9e68a389a4f
+  #id:8ea05fdc-8b79-41f1-b5cc-b559f76d17c8
   Your life is zero.
 <<</if>>>
 
 <<<if($love >= 10)>>>
-  #id:0d562e65-c2f6-4c8d-bcc7-a025a38ac103
+  #id:1a5ade00-2ad9-4c54-a74d-e7de5410e271
   Love Power!
 <<<else>>>
-  #id:2ee8e61f-0b2d-4b10-876c-19d940bc9f39
+  #id:f5d063fa-5451-4b04-8199-b68441e78430
   Hatred :(
 <<</if>>>
 
 <<<if($level >= 100)>>>
-  #id:be2ce002-9ab2-46ce-9b7e-c144f3d47270
+  #id:7613b733-f408-4cff-81b3-61d1d925ad68
   Champion!
 <<<elsif($level >= 10 && true)>>>
   #id:f3b68dfe-d2ed-4cd7-87a8-46fa7db1b2b2
   Good!
 <<<else>>>
-  #id:ce0082b5-3ccb-46cb-85c9-b067c3f190a6
+  #id:7e9313aa-46be-4e78-bf4f-901b99c3b341
   Welcome!
 <<</if>>>
 

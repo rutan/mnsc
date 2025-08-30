@@ -2,16 +2,14 @@
 meta: true
 ---
 
-// Comment
-
-#id:abcd1234
-rutan: face: 'smile'
-  Hello!
-
-<<bg(color: '#000', duration: 1000)>>
-
-<<<if(1 == 1)>>>
-  Something
-<<</if>>>
-
-text line
+<<<choices()>>>
+  #id:7f544f8e-7780-40bf-af95-8410fa163dd7
+  - Choice1 => *label1
+  #id:9d359661-cbb7-4b0e-93a5-af639174d8b2
+  - Choice2
+    => *label2
+  #id:f0508541-831d-49d4-ac55-8e5e56af2d1e
+  - [if($love > 10)]:
+    Choice3
+    => *label3
+<<</choices>>>
