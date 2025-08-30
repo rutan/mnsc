@@ -4,19 +4,15 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
     "test": "turbo run test",
     "lint": "run-s lint:*",
     "lint:biome": "biome check ./",
     "lint:packages": "turbo run lint",
     "format": "biome check --write ./",
-    "format-fix": "biome check --write --unsafe ./",
-    "release": "changeset publish",
-    "version-packages": "changeset version"
+    "format-fix": "biome check --write --unsafe ./"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
-    "@changesets/cli": "^2.29.6",
     "@types/node": "^24.3.0",
     "npm-run-all2": "^8.0.4",
     "tsup": "^8.5.0",

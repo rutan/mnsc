@@ -219,12 +219,14 @@
   "scripts": {
     "build": "tsup src/extension.ts --format esm --sourcemap --clean --out-dir dist --external vscode",
     "dev": "tsup src/extension.ts --format esm --sourcemap --watch --out-dir dist --external vscode",
-    "lint": "biome check ./"
+    "lint": "biome check ./",
+    "package": "pnpm run build && vsce package --out dist/vscode-mnsc.vsix"
   },
   "dependencies": {
     "@rutan/mnsc": "workspace:*"
   },
   "devDependencies": {
-    "vscode": "^1.1.37"
+    "@types/vscode": "^1.103.0",
+    "@vscode/vsce": "^3.6.0"
   }
 }
