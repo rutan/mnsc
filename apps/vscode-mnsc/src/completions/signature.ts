@@ -14,17 +14,39 @@ export class MnscSignatureHelpProvider implements vscode.SignatureHelpProvider {
     const fn = getConfig().functions.find((f) => f.name === fname);
     if (!fn) return null;
 
-    const args = (fn.args ?? []).map((a) => (typeof a === 'string' ? a : a.name));
     const inside = match?.groups?.inside ?? '';
-    const paramIndex = inside.trim() === '' ? 0 : Math.min(inside.split(',').length - 1, Math.max(0, args.length - 1));
+    const posArgs = fn.positional ?? [];
+    const namedArgs = fn.named ?? [];
+    const allNames: string[] = [...posArgs.map((a) => a.name), ...namedArgs.map((a) => `${a.name}:`)];
 
-    const sigInfo = new vscode.SignatureInformation(`${fname}(${args.join(', ')})`);
-    sigInfo.parameters = args.map((a) => new vscode.ParameterInformation(a));
+    // Naive split by comma to determine current segment index
+    const segments = inside === '' ? [] : inside.split(',');
+    const segIndex = segments.length === 0 ? 0 : segments.length - 1;
+
+    // Determine active parameter index: positional first, then named
+    let activeIndex = 0;
+    const firstNamedIdx = segments.findIndex((s) => s.includes(':'));
+    if (firstNamedIdx === -1) {
+      activeIndex = Math.min(segIndex, Math.max(0, posArgs.length - 1));
+    } else if (segIndex < firstNamedIdx) {
+      activeIndex = Math.min(segIndex, Math.max(0, posArgs.length - 1));
+    } else {
+      const current = segments[segIndex] ?? '';
+      const key = current.split(':')[0]?.trim();
+      const namedIdx = Math.max(
+        0,
+        namedArgs.findIndex((a) => a.name === key),
+      );
+      activeIndex = posArgs.length + (namedIdx >= 0 ? namedIdx : 0);
+    }
+
+    const sigInfo = new vscode.SignatureInformation(`${fname}(${allNames.join(', ')})`);
+    sigInfo.parameters = allNames.map((a) => new vscode.ParameterInformation(a));
 
     const help = new vscode.SignatureHelp();
     help.signatures = [sigInfo];
     help.activeSignature = 0;
-    help.activeParameter = Math.min(paramIndex, Math.max(0, args.length - 1));
+    help.activeParameter = Math.min(activeIndex, Math.max(0, allNames.length - 1));
     return help;
   }
 }

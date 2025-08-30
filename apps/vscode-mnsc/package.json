@@ -64,7 +64,71 @@
               },
               "args": {
                 "type": "array",
-                "description": "Named argument keys (either string or {name,type}).",
+                "description": "[Deprecated] Use positional/named. Named argument keys (either string or {name,type}).",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "name"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "string",
+                            "number",
+                            "boolean",
+                            "any"
+                          ],
+                          "default": "any"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "positional": {
+                "type": "array",
+                "description": "Positional arguments in order (either string or {name,type}).",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "name"
+                      ],
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "string",
+                            "number",
+                            "boolean",
+                            "any"
+                          ],
+                          "default": "any"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "named": {
+                "type": "array",
+                "description": "Named arguments (either string or {name,type}). These come after positional args.",
                 "items": {
                   "oneOf": [
                     {

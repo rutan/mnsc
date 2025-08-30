@@ -1,7 +1,11 @@
 {
   "mnsc.functions": [
     { "name": "bg", "args": ["color", "duration"] },
-    { "name": "playBgm", "args": [{ "name": "id", "type": "string" }, { "name": "loop", "type": "boolean" }] },
+    {
+      "name": "playBgm",
+      "positional": [{ "name": "id", "type": "string" }],
+      "named": [{ "name": "loop", "type": "boolean" }, { "name": "volume", "type": "number" }]
+    },
     { "name": "scene", "args": [{ "name": "name", "type": "string" }] }
   ],
   "mnsc.characters": [

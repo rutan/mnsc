@@ -29,14 +29,14 @@ export class TalkCompletionProvider implements vscode.CompletionItemProvider {
     const funcCtx = upToCursor.match(/<<<?\s*(?<fname>[A-Za-z_][A-Za-z0-9_]*)\s*\((?<inside>[^)]*)$/);
     if (funcCtx?.groups?.fname) {
       const fn = getConfig().functions.find((f) => f.name === funcCtx.groups?.fname);
-      if (!fn?.args) return [];
+      if (!fn) return [];
       const usedKeys = new Set<string>();
       for (const m of funcCtx.groups?.inside.split(',').map((t) => t.trim()) ?? []) {
         const k = m.split(':')[0]?.trim();
         if (k) usedKeys.add(k);
       }
-      return fn.args
-        .map((a) => (typeof a === 'string' ? a : a.name))
+      return fn.named
+        .map((a) => a.name)
         .filter((k) => !usedKeys.has(k))
         .map((k) => new vscode.CompletionItem(`${k}: `, vscode.CompletionItemKind.Field));
     }

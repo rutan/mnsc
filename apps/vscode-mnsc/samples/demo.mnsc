@@ -13,6 +13,8 @@ label: intro
 rutan: face: 'smile', fade: true, duration: 30
   Hello there!
 
+<<playBgm("room", loop: false, volume: 30)>>
+
 #id:ee43abca-9c29-4400-85d0-a486f2b070b6
 rutan: face: 'unknown'
   unknown face...
@@ -44,3 +46,4 @@ hain: face: 'angry'
 <<</if>>>
 
 <<playBgm("aaa", false)>>
+<<playBgm("room", loop: false, volume: 30)>>

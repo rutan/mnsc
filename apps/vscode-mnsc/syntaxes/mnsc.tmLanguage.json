@@ -41,19 +41,20 @@
       "patterns": [
         {
           "name": "meta.function.call.mnsc",
-          "begin": "<<",
+          "begin": "<<\\s*([A-Za-z_][A-Za-z0-9_]*)",
+          "beginCaptures": {
+            "1": { "name": "entity.name.function.mnsc" }
+          },
           "end": ">>",
           "patterns": [
-            {
-              "name": "entity.name.function.mnsc",
-              "match": "[A-Za-z_][A-Za-z0-9_]*"
-            },
-            {
-              "name": "variable.parameter.mnsc",
-              "match": "[A-Za-z_][A-Za-z0-9_]*(?=\\s*:)"
-            },
+            { "name": "punctuation.definition.group.begin.mnsc", "match": "\\(" },
+            { "name": "punctuation.definition.group.end.mnsc", "match": "\\)" },
+            { "name": "punctuation.separator.parameter.mnsc", "match": "," },
+            { "name": "punctuation.separator.key-value.mnsc", "match": ":" },
+            { "name": "variable.parameter.mnsc", "match": "[A-Za-z_][A-Za-z0-9_]*(?=\\s*:)" },
             { "include": "#strings" },
-            { "include": "#numbers" }
+            { "include": "#numbers" },
+            { "name": "constant.language.boolean.mnsc", "match": "\\b(?:true|false)\\b" }
           ]
         }
       ]
