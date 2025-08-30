@@ -12,6 +12,7 @@
 <<</if>>>
 
 <<<if($level >= 100)>>>
+  #id:ifBlockWithId
   Champion!
 <<<elsif($level >= 10)>>>
   Good!

@@ -7,10 +7,6 @@ flag: false
 
 <<set($love, 10)>>
 
-// label and id will be inserted before text
-#id:672c3094-4741-4c7e-a35a-a1ed886adeae
-label: intro
-
 #id:548b13c5-249d-4d3d-bb10-0fc9aa75fe3a
 へい
 
@@ -35,20 +31,20 @@ hain: face: 'angry'
   Grrr...
 
 <<<if($hp == 0)>>>
-#id:b8759d55-1260-4a87-92ea-b9e68a389a4f
+  #id:b8759d55-1260-4a87-92ea-b9e68a389a4f
   Your life is zero.
 <<</if>>>
 
 <<<if($love >= 10)>>>
-#id:0d562e65-c2f6-4c8d-bcc7-a025a38ac103
+  #id:0d562e65-c2f6-4c8d-bcc7-a025a38ac103
   Love Power!
 <<<else>>>
-#id:2ee8e61f-0b2d-4b10-876c-19d940bc9f39
+  #id:2ee8e61f-0b2d-4b10-876c-19d940bc9f39
   Hatred :(
 <<</if>>>
 
 <<<if($level >= 100)>>>
-  #id:59a4cdca-9d72-41b8-ab21-90869da790a6
+  #id:be2ce002-9ab2-46ce-9b7e-c144f3d47270
   Champion!
 <<<elsif($level >= 10 && true)>>>
   #id:f3b68dfe-d2ed-4cd7-87a8-46fa7db1b2b2
@@ -63,8 +59,6 @@ hain: face: 'angry'
 <<set($bgmId, "ending_theme")>>
 <<set($sfxVolume, 80)>>
 <<set($loopEnabled, true)>>
-
-- Choice 1 => *label1
 
 // 選択肢用の構文
 <<<choices()>>>

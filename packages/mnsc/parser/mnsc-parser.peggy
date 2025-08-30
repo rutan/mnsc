@@ -178,7 +178,7 @@ FrontMatterSimpleValue = chars:[^\r\n]+ { return chars.join("").trim(); }
 // Command
 // --------------------------------------------------------
 
-Command = Separator / LineComment / IfBlock / BlockFunction / CallFunction / Label / ChoiceItem / TalkText / Text
+Command = Separator / LineComment / IfBlock / ChoicesBlock / BlockFunction / CallFunction / Label / TalkText / Text
 
 Separator = BlankLine+ { return null; }
 
@@ -248,6 +248,22 @@ BlockFunctionContent = items:(item:BlockFunctionItem _ { return item; })* {
 
 BlockFunctionItem = !(_ BlockFunctionPrefix '/') command:Command { return command; }
 
+ChoicesBlock =
+  BlockFunctionPrefix 'choices' '(' args:FunctionArgs ')' BlockFunctionSuffix EndOfLine
+  children:ChoicesBlockContent
+  _ BlockFunctionPrefix '/' 'choices' BlockFunctionSuffix EndOfLine {
+    return {
+      command: 'choices',
+      args: args || [],
+      children,
+      loc: location()
+    };
+  }
+
+ChoicesBlockContent = items:(item:ChoiceItem _ { return item; })* {
+  return items.filter(Boolean);
+}
+
 // 関数呼び出し
 CallFunction = CallFunctionPrefix name:FunctionName '(' args:FunctionArgs ')' CallFunctionSuffix EndOfLine {
   return {
@@ -268,7 +284,7 @@ Label = '*' name:Identity EndOfLine {
   };
 }
 
-// 選択肢の要素
+// 選択肢の要素（ChoicesBlock内でのみ有効）
 ChoiceItem =
   _ idPart:('#id:' id:Identity EndOfLine)?
   _ '-' _ cond:ChoiceCondition? _ content:ChoiceContentAndLabel {
@@ -301,21 +317,21 @@ ChoiceCondition = '[if(' _ condition:ConditionalExpression _ params:(',' _ p:Nam
 
 // テキスト
 Text =
-  idPart:('#id:' id:Identity EndOfLine)?
+  idPart:(_ '#id:' id:Identity EndOfLine { return id; })?
   lines:MessageLine+ {
     const command = {
       command: 'text',
       args: [dedentLines(lines)],
       loc: location()
     };
-    if (idPart) command.id = idPart[1];
+    if (idPart) command.id = idPart;
 
     return command;
   }
 
 // 会話テキスト
 TalkText =
-  idPart:('#id:' id:Identity EndOfLine)?
+  idPart:(_ '#id:' id:Identity EndOfLine { return id; })?
   name:TalkName ':' params:TalkParameters? Break
   lines:(TalkMessageLine)* {
     const command = {
@@ -329,7 +345,7 @@ TalkText =
       ],
       loc: location()
     };
-    if (idPart) command.id = idPart[1];
+    if (idPart) command.id = idPart;
 
     return command;
   }
@@ -533,8 +549,11 @@ TalkParameter = key:Identity _ ':' _ value:TalkParameterValue {
 
 TalkParameterValue = StringLiteral / NumberLiteral / BooleanLiteral / NullLiteral
 
+// Only exclude simple talk headers like `name:` from being consumed by Text lines
+TalkHeader = [A-Za-z0-9_]+ ':'
+
 MessageLine =
-  !(_ (CallFunctionPrefix / BlockFunctionPrefix / '#id:' / '*' / '//'))
+  !(_ (CallFunctionPrefix / BlockFunctionPrefix / '#id:' / '*' / '//' / TalkHeader))
   body:Chars
   EndOfLine { return body; }
 

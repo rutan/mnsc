@@ -91,6 +91,7 @@
           },
           "children": [
             {
+              "id": "ifBlockWithId",
               "command": "text",
               "args": [
                 "Champion!"
