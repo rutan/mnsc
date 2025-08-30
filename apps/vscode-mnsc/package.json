@@ -1,13 +1,19 @@
 {
-  "name": "@rutan/vscode-mnsc",
+  "name": "vscode-mnsc",
+  "type": "module",
+  "version": "0.1.0",
   "displayName": "MNSC Language Support",
   "description": "Syntax highlighting, completions, and ID tools for .mnsc files.",
   "private": true,
-  "version": "0.1.0",
-  "type": "module",
   "publisher": "rutan",
+  "author": "rutan <ru_shalm@hazimu.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rutan/mnsc"
+  },
   "engines": {
-    "vscode": "^1.86.0"
+    "vscode": "^1.103.0"
   },
   "categories": [
     "Programming Languages"
@@ -220,7 +226,7 @@
     "build": "tsup src/extension.ts --format esm --sourcemap --clean --out-dir dist --external vscode",
     "dev": "tsup src/extension.ts --format esm --sourcemap --watch --out-dir dist --external vscode",
     "lint": "biome check ./",
-    "package": "pnpm run build && vsce package --out dist/vscode-mnsc.vsix"
+    "package": "pnpm run build && vsce package --no-dependencies --out dist/"
   },
   "dependencies": {
     "@rutan/mnsc": "workspace:*"
