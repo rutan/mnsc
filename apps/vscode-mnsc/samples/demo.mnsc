@@ -35,20 +35,26 @@ hain: face: 'angry'
   Grrr...
 
 <<<if($hp == 0)>>>
+#id:b8759d55-1260-4a87-92ea-b9e68a389a4f
   Your life is zero.
 <<</if>>>
 
 <<<if($love >= 10)>>>
+#id:0d562e65-c2f6-4c8d-bcc7-a025a38ac103
   Love Power!
 <<<else>>>
+#id:2ee8e61f-0b2d-4b10-876c-19d940bc9f39
   Hatred :(
 <<</if>>>
 
 <<<if($level >= 100)>>>
+  #id:59a4cdca-9d72-41b8-ab21-90869da790a6
   Champion!
 <<<elsif($level >= 10 && true)>>>
+  #id:f3b68dfe-d2ed-4cd7-87a8-46fa7db1b2b2
   Good!
 <<<else>>>
+  #id:ce0082b5-3ccb-46cb-85c9-b067c3f190a6
   Welcome!
 <<</if>>>
 
