@@ -52,6 +52,7 @@
             { "name": "punctuation.separator.parameter.mnsc", "match": "," },
             { "name": "punctuation.separator.key-value.mnsc", "match": ":" },
             { "name": "variable.parameter.mnsc", "match": "[A-Za-z_][A-Za-z0-9_]*(?=\\s*:)" },
+            { "include": "#variables" },
             { "include": "#strings" },
             { "include": "#numbers" },
             { "name": "constant.language.boolean.mnsc", "match": "\\b(?:true|false)\\b" }
@@ -68,8 +69,14 @@
           "patterns": [
             { "name": "entity.name.function.mnsc", "match": "\/?[A-Za-z_][A-Za-z0-9_]*" },
             { "name": "variable.parameter.mnsc", "match": "[A-Za-z_][A-Za-z0-9_]*(?=\\s*:)" },
+            { "name": "punctuation.definition.group.begin.mnsc", "match": "\\(" },
+            { "name": "punctuation.definition.group.end.mnsc", "match": "\\)" },
+            { "name": "punctuation.separator.parameter.mnsc", "match": "," },
+            { "name": "punctuation.separator.key-value.mnsc", "match": ":" },
+            { "include": "#variables" },
             { "include": "#strings" },
-            { "include": "#numbers" }
+            { "include": "#numbers" },
+            { "name": "constant.language.boolean.mnsc", "match": "\\b(?:true|false)\\b" }
           ]
         }
       ]
@@ -87,11 +94,17 @@
             { "name": "variable.parameter.face.mnsc", "match": "\\bface(?=\\s*:)" },
             { "name": "variable.parameter.mnsc", "match": "\\b[A-Za-z_][A-Za-z0-9_]*(?=\\s*:)" },
             { "name": "punctuation.separator.parameter.mnsc", "match": "," },
+            { "include": "#variables" },
             { "include": "#strings" },
             { "include": "#numbers" },
             { "name": "constant.language.boolean.mnsc", "match": "\\b(?:true|false)\\b" }
           ]
         }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        { "name": "variable.other.mnsc", "match": "\\$[A-Za-z_][A-Za-z0-9_]*" }
       ]
     },
     "strings": {
