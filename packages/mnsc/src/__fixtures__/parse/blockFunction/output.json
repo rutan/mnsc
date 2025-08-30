@@ -7,9 +7,7 @@
       "children": [
         {
           "command": "text",
-          "args": [
-            "Simple text inside block.\nAnother line."
-          ],
+          "args": ["Simple text inside block.\nAnother line."],
           "loc": {}
         }
       ],
@@ -17,16 +15,11 @@
     },
     {
       "command": "blockWithArgs",
-      "args": [
-        "arg1",
-        42
-      ],
+      "args": ["arg1", 42],
       "children": [
         {
           "command": "text",
-          "args": [
-            "Text with arguments."
-          ],
+          "args": ["Text with arguments."],
           "loc": {}
         }
       ],
@@ -38,9 +31,7 @@
       "children": [
         {
           "command": "text",
-          "args": [
-            "Outer block content."
-          ],
+          "args": ["Outer block content."],
           "loc": {}
         },
         {
@@ -49,9 +40,7 @@
           "children": [
             {
               "command": "text",
-              "args": [
-                "Inner block content.\nMore inner content."
-              ],
+              "args": ["Inner block content.\nMore inner content."],
               "loc": {}
             }
           ],
@@ -59,9 +48,7 @@
         },
         {
           "command": "text",
-          "args": [
-            "Back to outer content."
-          ],
+          "args": ["Back to outer content."],
           "loc": {}
         }
       ],

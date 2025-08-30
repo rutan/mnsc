@@ -1,0 +1,12 @@
+---
+---
+
+<<<if($love > 10)>>>
+  #id:<HEX8>
+  rutan:
+    Hello!
+
+  #id:<HEX8>
+  rutan: face: 'smile'
+    Bye!
+<<</if>>>

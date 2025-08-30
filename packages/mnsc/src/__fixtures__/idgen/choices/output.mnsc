@@ -1,0 +1,14 @@
+---
+---
+
+<<<choices()>>>
+  #id:<HEX8>
+  - Choice 1 => *label1
+  #id:<HEX8>
+  - Choice 2
+    => *label2
+  #id:<HEX8>
+  - [if($love > 10)]:
+    Choice3
+    => *label3
+<<</choices>>>

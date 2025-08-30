@@ -21,9 +21,7 @@
           "children": [
             {
               "command": "text",
-              "args": [
-                "Your life is zero."
-              ],
+              "args": ["Your life is zero."],
               "loc": {}
             }
           ]
@@ -51,9 +49,7 @@
           "children": [
             {
               "command": "text",
-              "args": [
-                "Love Power!"
-              ],
+              "args": ["Love Power!"],
               "loc": {}
             }
           ]
@@ -62,9 +58,7 @@
           "children": [
             {
               "command": "text",
-              "args": [
-                "Hatred :("
-              ],
+              "args": ["Hatred :("],
               "loc": {}
             }
           ]
@@ -93,9 +87,7 @@
             {
               "id": "ifBlockWithId",
               "command": "text",
-              "args": [
-                "Champion!"
-              ],
+              "args": ["Champion!"],
               "loc": {}
             }
           ]
@@ -116,9 +108,7 @@
           "children": [
             {
               "command": "text",
-              "args": [
-                "Good!"
-              ],
+              "args": ["Good!"],
               "loc": {}
             }
           ]
@@ -127,9 +117,7 @@
           "children": [
             {
               "command": "text",
-              "args": [
-                "Welcome!"
-              ],
+              "args": ["Welcome!"],
               "loc": {}
             }
           ]

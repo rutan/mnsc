@@ -1,50 +1,7 @@
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import { parse } from './parse';
 
-const exampleDir = join(import.meta.dirname, '../../../examples');
-
-// exampleDir 以下のファイル一覧を取得
-const targets = ['choices', 'text', 'talk', 'frontmatter', 'function', 'blockFunction', 'if'];
-
-// biome-ignore lint/suspicious/noExplicitAny: test
-function toPrettyJson(object: any) {
-  return JSON.stringify(
-    object,
-    (key, value) => {
-      if (key === 'loc') return undefined; // Changed from {} to undefined to remove the key
-
-      if (value && typeof value === 'object' && !Array.isArray(value)) {
-        return (
-          Object.keys(value)
-            .sort()
-            // biome-ignore lint/suspicious/noExplicitAny: test utility
-            .reduce<Record<string, any>>((acc, key) => {
-              acc[key] = value[key];
-              return acc;
-            }, {})
-        );
-      }
-      return value;
-    },
-    2,
-  );
-}
-
 describe('parse', () => {
-  // success pattern
-  targets.forEach((target) => {
-    test(`parse ${target}`, async () => {
-      const mnscCode = await readFile(join(exampleDir, `${target}.mnsc`), 'utf-8');
-      const answerJson = toPrettyJson(JSON.parse(await readFile(join(exampleDir, `${target}.json`), 'utf-8')));
-      const result = toPrettyJson(parse(mnscCode));
-
-      expect(result).toBe(answerJson);
-    });
-  });
-
-  // invalid pattern
   test('no label choice item', () => {
     const mnscCode = `
 ---

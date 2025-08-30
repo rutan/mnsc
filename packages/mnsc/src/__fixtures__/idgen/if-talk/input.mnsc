@@ -1,0 +1,10 @@
+---
+---
+
+<<<if($love > 10)>>>
+  rutan:
+    Hello!
+
+  rutan: face: 'smile'
+    Bye!
+<<</if>>>

@@ -8,47 +8,32 @@
     },
     {
       "command": "stringArgCommand",
-      "args": [
-        "string arg0"
-      ],
+      "args": ["string arg0"],
       "loc": {}
     },
     {
       "command": "stringArgsCommand",
-      "args": [
-        "string arg0 ☺️",
-        "string arg1"
-      ],
+      "args": ["string arg0 ☺️", "string arg1"],
       "loc": {}
     },
     {
       "command": "numberArgCommand",
-      "args": [
-        123
-      ],
+      "args": [123],
       "loc": {}
     },
     {
       "command": "numberArgsCommand",
-      "args": [
-        -456,
-        789
-      ],
+      "args": [-456, 789],
       "loc": {}
     },
     {
       "command": "booleanArgCommand",
-      "args": [
-        true
-      ],
+      "args": [true],
       "loc": {}
     },
     {
       "command": "booleanArgsCommand",
-      "args": [
-        false,
-        true
-      ],
+      "args": [false, true],
       "loc": {}
     },
     {
@@ -71,23 +56,17 @@
     },
     {
       "command": "arithmeticCommand",
-      "args": [
-        30
-      ],
+      "args": [30],
       "loc": {}
     },
     {
       "command": "additionCommand",
-      "args": [
-        7
-      ],
+      "args": [7],
       "loc": {}
     },
     {
       "command": "complexArithmeticCommand",
-      "args": [
-        20
-      ],
+      "args": [20],
       "loc": {}
     },
     {
@@ -136,9 +115,7 @@
     },
     {
       "command": "comparisonCommand",
-      "args": [
-        true
-      ],
+      "args": [true],
       "loc": {}
     },
     {

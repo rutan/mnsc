@@ -4,7 +4,10 @@
     {
       "command": "text",
       "args": [
-        "Text command."
+        "This is talk style text command.\n(and multiline text.)",
+        {
+          "name": "rutan"
+        }
       ],
       "loc": {
         "start": {
@@ -13,27 +16,31 @@
           "column": 1
         },
         "end": {
-          "offset": 23,
-          "line": 5,
+          "offset": 75,
+          "line": 7,
           "column": 1
         }
       }
     },
     {
-      "id": "text-command-id",
+      "id": "talk-command-id",
       "command": "text",
       "args": [
-        "Text command with id."
+        "This is talk style text command with id and parameters.",
+        {
+          "name": "rutan",
+          "face": "smile"
+        }
       ],
       "loc": {
         "start": {
-          "offset": 24,
-          "line": 6,
+          "offset": 76,
+          "line": 8,
           "column": 1
         },
         "end": {
-          "offset": 66,
-          "line": 8,
+          "offset": 175,
+          "line": 11,
           "column": 1
         }
       }

@@ -1,0 +1,11 @@
+---
+---
+
+<<<choices()>>>
+  - Choice 1 => *label1
+  - Choice 2
+    => *label2
+  - [if($love > 10)]:
+    Choice3
+    => *label3
+<<</choices>>>

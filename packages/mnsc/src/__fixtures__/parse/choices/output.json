@@ -173,16 +173,12 @@
     },
     {
       "command": "label",
-      "args": [
-        "label1"
-      ],
+      "args": ["label1"],
       "loc": {}
     },
     {
       "command": "text",
-      "args": [
-        "Normal End."
-      ],
+      "args": ["Normal End."],
       "loc": {}
     },
     {
@@ -192,16 +188,12 @@
     },
     {
       "command": "label",
-      "args": [
-        "label2"
-      ],
+      "args": ["label2"],
       "loc": {}
     },
     {
       "command": "text",
-      "args": [
-        "Bad End."
-      ],
+      "args": ["Bad End."],
       "loc": {}
     },
     {
@@ -211,37 +203,27 @@
     },
     {
       "command": "label",
-      "args": [
-        "label3"
-      ],
+      "args": ["label3"],
       "loc": {}
     },
     {
       "command": "label",
-      "args": [
-        "label4"
-      ],
+      "args": ["label4"],
       "loc": {}
     },
     {
       "command": "label",
-      "args": [
-        "label5"
-      ],
+      "args": ["label5"],
       "loc": {}
     },
     {
       "command": "label",
-      "args": [
-        "label6"
-      ],
+      "args": ["label6"],
       "loc": {}
     },
     {
       "command": "text",
-      "args": [
-        "Good End."
-      ],
+      "args": ["Good End."],
       "loc": {}
     },
     {
