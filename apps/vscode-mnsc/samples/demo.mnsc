@@ -54,3 +54,55 @@ hain: face: 'angry'
 
 <<playBgm("aaa", false)>>
 <<playBgm("room", loop: false, volume: 30)>>
+<<set($bgmId, "ending_theme")>>
+<<set($sfxVolume, 80)>>
+<<set($loopEnabled, true)>>
+
+// 選択肢用の構文
+<<<choices()>>>
+  #id:choice01
+  - Choice 1 => *label1
+  #id:choice02
+  - Choice 2
+    => *label2
+  #id:choice03
+  - [if($love >= 10, alwaysVisible: true)]:
+    Choice 3 [small]（if love over 10）[/small]
+    => *label3
+  #id:choice04
+  - [if($level > 5 && $experience >= 100)]:
+    Complex choice 4
+    => *label4
+  #id:choice05
+  - [if($health <= 50 || ($mana > 20 && $stamina != 0))]:
+    Complex choice 5
+    => *label5
+  #id:choice06
+  - [if($name == "player")]:
+    String comparison choice 6
+    => *label6
+<<</choices>>>
+
+*label1
+#id:6b52149d-4bd8-4513-8315-9497426ff346
+label1 message
+
+*label2
+#id:0e3d49d0-e245-4f01-a809-e44898bfebe8
+label2 message
+
+*label3
+#id:4ba4afff-bfef-4ce5-a79b-749350e25333
+label3 message
+
+*label4
+#id:d5146319-ee00-4bab-a091-a016a19f9c03
+label4 message
+
+*label5
+#id:ffc43288-18e2-4116-b275-87388b386240
+label5 message
+
+*label6
+#id:f5688365-301d-4650-882d-211e3d0586bf
+label6 message

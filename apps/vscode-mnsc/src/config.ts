@@ -46,8 +46,29 @@ function normalizeFunction(f: unknown): MnscUserFunction | null {
 
 function readConfig(): MnscConfig {
   const c = vscode.workspace.getConfiguration('mnsc');
+  // Built-in functions that should always be available for tooling
+  const builtins: MnscUserFunction[] = [
+    // set($var, value)
+    {
+      name: 'set',
+      positional: [
+        { name: 'var', type: 'any' },
+        { name: 'value', type: 'any' },
+      ],
+      named: [],
+    },
+    // <<<choices()>>>
+    { name: 'choices', positional: [], named: [] },
+  ];
+
+  // Merge user-configured functions over built-ins by name (user overrides win)
+  const userFns = c.get<unknown[]>('functions', []).map(normalizeFunction).filter(Boolean) as MnscUserFunction[];
+  const byName = new Map<string, MnscUserFunction>();
+  for (const f of builtins) byName.set(f.name, f);
+  for (const f of userFns) byName.set(f.name, f);
+
   return {
-    functions: c.get<unknown[]>('functions', []).map(normalizeFunction).filter(Boolean) as MnscUserFunction[],
+    functions: Array.from(byName.values()),
     characters: c.get<MnscCharacter[]>('characters', []),
     generateIds: {
       onSave: c.get<boolean>('generateIds.onSave', false),

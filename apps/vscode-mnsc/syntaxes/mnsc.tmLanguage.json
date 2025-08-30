@@ -40,6 +40,22 @@
     "callFunction": {
       "patterns": [
         {
+          "name": "meta.function.call.set.mnsc",
+          "begin": "<<\\s*(set)",
+          "beginCaptures": { "1": { "name": "support.function.set.mnsc" } },
+          "end": ">>",
+          "patterns": [
+            { "name": "punctuation.definition.group.begin.mnsc", "match": "\\(" },
+            { "name": "punctuation.definition.group.end.mnsc", "match": "\\)" },
+            { "name": "punctuation.separator.parameter.mnsc", "match": "," },
+            { "name": "punctuation.separator.key-value.mnsc", "match": ":" },
+            { "include": "#variables" },
+            { "include": "#strings" },
+            { "include": "#numbers" },
+            { "name": "constant.language.boolean.mnsc", "match": "\\b(?:true|false)\\b" }
+          ]
+        },
+        {
           "name": "meta.function.call.mnsc",
           "begin": "<<\\s*([A-Za-z_][A-Za-z0-9_]*)",
           "beginCaptures": {
@@ -67,6 +83,7 @@
           "begin": "<<<",
           "end": ">>>",
           "patterns": [
+            { "name": "support.function.choices.mnsc", "match": "\/?choices\\b" },
             { "name": "entity.name.function.mnsc", "match": "\/?[A-Za-z_][A-Za-z0-9_]*" },
             { "name": "variable.parameter.mnsc", "match": "[A-Za-z_][A-Za-z0-9_]*(?=\\s*:)" },
             { "name": "punctuation.definition.group.begin.mnsc", "match": "\\(" },
@@ -103,9 +120,7 @@
       ]
     },
     "variables": {
-      "patterns": [
-        { "name": "variable.other.mnsc", "match": "\\$[A-Za-z_][A-Za-z0-9_]*" }
-      ]
+      "patterns": [{ "name": "variable.other.mnsc", "match": "\\$[A-Za-z_][A-Za-z0-9_]*" }]
     },
     "strings": {
       "patterns": [
