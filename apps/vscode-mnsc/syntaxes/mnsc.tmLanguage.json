@@ -101,8 +101,8 @@
           "begin": "^\\s*<<<",
           "end": "^\\s*<<</[A-Za-z_][A-Za-z0-9_]*>>>\\s*$",
           "patterns": [
-            { "name": "support.function.choices.mnsc", "match": "\/?choices\\b" },
-            { "name": "entity.name.function.mnsc", "match": "\/?[A-Za-z_][A-Za-z0-9_]*" },
+            { "name": "support.function.choices.mnsc", "match": "(?<=^\\s*<<<\\s*)\/?choices\\b" },
+            { "name": "entity.name.function.mnsc", "match": "(?<=^\\s*<<<\\s*)\/?[A-Za-z_][A-Za-z0-9_]*" },
             { "include": "#ids" },
             { "include": "#labels" },
             { "include": "#items" },
