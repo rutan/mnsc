@@ -10,7 +10,7 @@ flag: false
 label: intro
 
 #id:7f891b37-f4f9-4ab9-94d3-ef706f11f46f
-rutan: face: 'smile'
+rutan: face: 'smile', fade: true, duration: 30
   Hello there!
 
 #id:ee43abca-9c29-4400-85d0-a486f2b070b6
