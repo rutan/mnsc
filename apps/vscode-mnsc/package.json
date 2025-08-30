@@ -3,7 +3,7 @@
   "displayName": "MNSC Language Support",
   "description": "Syntax highlighting, completions, and ID tools for .mnsc files.",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "publisher": "rutan",
   "engines": {

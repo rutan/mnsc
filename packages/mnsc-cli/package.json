@@ -1,7 +1,7 @@
 {
   "name": "@rutan/mnsc-cli",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CLI tool for MNSC parser",
   "author": "ru_shalm <ru_shalm@hazimu.com>",
   "license": "MIT",
