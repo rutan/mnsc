@@ -70,6 +70,73 @@ describe('ID Generator Service', () => {
       expect(result).toMatch(/#id:[0-9a-f]{8}\nFinal paragraph\./);
     });
 
+    test('preserves indentation when inserting IDs inside indented blocks', () => {
+      const content = `
+---
+---
+<<<if($love > 10)>>>
+  rutan:
+    Hello!
+
+  rutan: face: 'smile'
+    Bye!
+<<</if>>>
+`.trim();
+
+      const expectText = `
+---
+---
+<<<if($love > 10)>>>
+  #id:36d8d546
+  rutan:
+    Hello!
+
+  #id:69927cf3
+  rutan: face: 'smile'
+    Bye!
+<<</if>>>
+`.trim();
+
+      const ast = parse(content, { includeLoc: true });
+      const result = insertIdsUsingLoc(content, ast, { format: 'hash' });
+      expect(result).toBe(expectText);
+    });
+
+    test('insert choice item ids', () => {
+      const content = `
+---
+---
+<<<choices()>>>
+  - Choice1 => *label1
+  - Choice2
+    => *label2
+  - [if($love > 10)]:
+    Choice3
+    => *label3
+<<</choices>>>
+`.trim();
+
+      const expectText = `
+---
+---
+<<<choices()>>>
+  #id:fdf0f65c
+  - Choice1 => *label1
+  #id:69caec7c
+  - Choice2
+    => *label2
+  #id:dcd51a78
+  - [if($love > 10)]:
+    Choice3
+    => *label3
+<<</choices>>>
+`.trim();
+
+      const ast = parse(content, { includeLoc: true });
+      const result = insertIdsUsingLoc(content, ast, { format: 'hash' });
+      expect(result).toBe(expectText);
+    });
+
     test('does not modify commands with existing IDs', () => {
       const content = `---\n---\n\n#id:existing-id\nFirst paragraph.\n\nSecond paragraph.`;
       const ast = parse(content, { includeLoc: true });

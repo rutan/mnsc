@@ -81,26 +81,41 @@ export function insertIdsUsingLoc(
     insertPosition: number;
   }> = [];
 
-  for (const command of ast.commands) {
-    if (!command.id && shouldAssignId(command) && command.loc) {
-      const id = generator({
-        command,
-        index: index++,
-        filePath: options.filePath || '',
-      });
+  function collectFromCommands(list: Command[]) {
+    for (const command of list) {
+      if (!command.id && shouldAssignId(command) && command.loc) {
+        const id = generator({
+          command,
+          index: index++,
+          filePath: options.filePath || '',
+        });
 
-      logger?.verbose(`Will assign ID "${id}" to ${command.command} command`);
+        logger?.verbose(`Will assign ID "${id}" to ${command.command} command`);
 
-      // コマンドの開始位置を取得
-      const insertPosition = command.loc.start.offset;
+        const insertPosition = command.loc.start.offset;
 
-      commandsToModify.push({
-        command,
-        id,
-        insertPosition,
-      });
+        commandsToModify.push({
+          command,
+          id,
+          insertPosition,
+        });
+      }
+
+      // Recurse into block children
+      // biome-ignore lint/suspicious/noExplicitAny: union type narrowing by property
+      const anyCmd: any = command as any;
+      if (anyCmd && Array.isArray(anyCmd.children)) {
+        collectFromCommands(anyCmd.children);
+      }
+      if (anyCmd && anyCmd.command === 'if' && Array.isArray(anyCmd.branches)) {
+        for (const br of anyCmd.branches) {
+          if (Array.isArray(br.children)) collectFromCommands(br.children);
+        }
+      }
     }
   }
+
+  collectFromCommands(ast.commands);
 
   if (commandsToModify.length === 0) {
     logger?.verbose('No commands need ID assignment');
@@ -113,19 +128,28 @@ export function insertIdsUsingLoc(
   let result = content;
 
   for (const { id, insertPosition } of commandsToModify) {
-    // 挿入位置の直前に改行があるかチェック
-    const beforeChar = insertPosition > 0 ? result[insertPosition - 1] : '';
-    const needsNewline = beforeChar !== '\n' && beforeChar !== '';
+    // 行頭位置を計算（改行の直後）
+    let lineStart = insertPosition - 1;
+    while (lineStart >= 0 && result[lineStart] !== '\n' && result[lineStart] !== '\r') {
+      lineStart--;
+    }
+    lineStart++;
 
-    const idLine = `#id:${id}\n`;
-    const insertText = needsNewline ? `\n${idLine}` : idLine;
+    // 対象行のインデント（スペース/タブ）を取得
+    let firstNonWs = lineStart;
+    while (firstNonWs < result.length && (result[firstNonWs] === ' ' || result[firstNonWs] === '\t')) {
+      firstNonWs++;
+    }
+    const indent = result.slice(lineStart, firstNonWs);
 
-    result = result.slice(0, insertPosition) + insertText + result.slice(insertPosition);
+    // 常に行頭に挿入して、インデントを維持
+    const idLine = `${indent}#id:${id}\n`;
+    result = result.slice(0, lineStart) + idLine + result.slice(lineStart);
   }
 
   return result;
 }
 
 function shouldAssignId(command: Command): boolean {
-  return command.command === 'text';
+  return command.command === 'text' || command.command === 'item';
 }
