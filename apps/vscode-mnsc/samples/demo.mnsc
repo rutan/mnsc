@@ -58,6 +58,8 @@ hain: face: 'angry'
 <<set($sfxVolume, 80)>>
 <<set($loopEnabled, true)>>
 
+- Choice 1 => *label1
+
 // 選択肢用の構文
 <<<choices()>>>
   #id:choice01

@@ -7,6 +7,7 @@
     { "include": "#frontMatterFence" },
     { "include": "#ids" },
     { "include": "#labels" },
+    { "include": "#items" },
     { "include": "#blockFunction" },
     { "include": "#callFunction" },
     { "include": "#talk" }
@@ -46,9 +47,10 @@
         },
         {
           "name": "meta.label.reference.mnsc",
-          "match": "=>\\s*(\\*[A-Za-z_][A-Za-z0-9_]*)",
+          "match": "(=>)\\s*(\\*[A-Za-z_][A-Za-z0-9_]*)",
           "captures": {
-            "1": { "name": "entity.name.label.mnsc" }
+            "1": { "name": "keyword.operator.choice-dest.mnsc" },
+            "2": { "name": "entity.name.label.mnsc" }
           }
         }
       ]
@@ -95,12 +97,15 @@
     "blockFunction": {
       "patterns": [
         {
-          "name": "meta.function.block.begin.mnsc",
-          "begin": "<<<",
-          "end": ">>>",
+          "name": "meta.function.block.mnsc",
+          "begin": "^\\s*<<<",
+          "end": "^\\s*<<</[A-Za-z_][A-Za-z0-9_]*>>>\\s*$",
           "patterns": [
             { "name": "support.function.choices.mnsc", "match": "\/?choices\\b" },
             { "name": "entity.name.function.mnsc", "match": "\/?[A-Za-z_][A-Za-z0-9_]*" },
+            { "include": "#ids" },
+            { "include": "#labels" },
+            { "include": "#items" },
             { "name": "variable.parameter.mnsc", "match": "[A-Za-z_][A-Za-z0-9_]*(?=\\s*:)" },
             { "name": "punctuation.definition.group.begin.mnsc", "match": "\\(" },
             { "name": "punctuation.definition.group.end.mnsc", "match": "\\)" },
@@ -110,6 +115,44 @@
             { "include": "#strings" },
             { "include": "#numbers" },
             { "name": "constant.language.boolean.mnsc", "match": "\\b(?:true|false)\\b" }
+          ]
+        }
+      ]
+    },
+    "items": {
+      "patterns": [
+        {
+          "name": "meta.choice.item.mnsc",
+          "begin": "^\\s*(-)\\s",
+          "beginCaptures": { "1": { "name": "punctuation.definition.item.mnsc" } },
+          "end": "$",
+          "patterns": [
+            {
+              "name": "meta.choice.item.guard.mnsc",
+              "begin": "(\\[)\\s*(if)\\s*\\(",
+              "beginCaptures": {
+                "1": { "name": "punctuation.section.brackets.begin.mnsc" },
+                "2": { "name": "keyword.control.if.mnsc" }
+              },
+              "end": "\\)\\s*(\\])\\s*(:)",
+              "endCaptures": {
+                "1": { "name": "punctuation.section.brackets.end.mnsc" },
+                "2": { "name": "punctuation.separator.key-value.mnsc" }
+              },
+              "patterns": [
+                { "name": "punctuation.definition.group.begin.mnsc", "match": "\\(" },
+                { "name": "punctuation.definition.group.end.mnsc", "match": "\\)" },
+                { "name": "punctuation.separator.parameter.mnsc", "match": "," },
+                { "name": "punctuation.separator.key-value.mnsc", "match": ":" },
+                { "include": "#variables" },
+                { "include": "#strings" },
+                { "include": "#numbers" },
+                { "name": "constant.language.boolean.mnsc", "match": "\\b(?:true|false)\\b" },
+                { "name": "keyword.operator.logical.mnsc", "match": "&&|\\|\\|" },
+                { "name": "keyword.operator.comparison.mnsc", "match": "==|!=|>=|<=|>|<" }
+              ]
+            },
+            { "include": "#labels" }
           ]
         }
       ]
