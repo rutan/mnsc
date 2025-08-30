@@ -226,7 +226,9 @@
     "build": "tsup src/extension.ts --format esm --sourcemap --clean --out-dir dist --external vscode",
     "dev": "tsup src/extension.ts --format esm --sourcemap --watch --out-dir dist --external vscode",
     "lint": "biome check ./",
-    "package": "pnpm run build && vsce package --no-dependencies --out dist/"
+    "package": "pnpm run build && vsce package --no-dependencies --out dist/",
+    "publish": "run-s build publish:*",
+    "publish:vsce": "vsce publish --no-dependencies"
   },
   "dependencies": {
     "@rutan/mnsc": "workspace:*"
