@@ -1,5 +1,11 @@
 # @rutan/vscode-mnsc
 
+## 0.2.2
+
+### Patch Changes
+
+- [#6](https://github.com/rutan/mnsc/pull/6) [`bc8ea1b`](https://github.com/rutan/mnsc/commit/bc8ea1b58e69f70a64482860057684e6b9a52767) Thanks [@rutan](https://github.com/rutan)! - fix bundle
+
 ## 0.2.0
 
 ### Minor Changes
