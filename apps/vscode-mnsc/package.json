@@ -1,7 +1,7 @@
 {
   "name": "vscode-mnsc",
   "type": "module",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "displayName": "MNSC: Minimal Narrative Script Code",
   "description": "Syntax highlighting, completions, and ID tools for .mnsc files.",
   "private": true,
