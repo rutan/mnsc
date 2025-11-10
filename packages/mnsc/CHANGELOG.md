@@ -1,5 +1,11 @@
 # @rutan/mnsc
 
+## 0.3.0
+
+### Minor Changes
+
+- [#9](https://github.com/rutan/mnsc/pull/9) [`6381fd1`](https://github.com/rutan/mnsc/commit/6381fd1688678993f0aedc37125d18157305c560) Thanks [@rutan](https://github.com/rutan)! - add frontMatterParser option
+
 ## 0.2.0
 
 ### Minor Changes
