@@ -2,13 +2,20 @@ import type { BlockCommand, Command, IfCommand, Mnsc } from '@rutan/mnsc';
 import { parse } from '@rutan/mnsc';
 import * as vscode from 'vscode';
 import { getConfig } from '../config';
+
 export function maybeValidate(doc: vscode.TextDocument, collection: vscode.DiagnosticCollection) {
   if (doc.languageId !== 'mnsc') return;
+
+  const config = getConfig();
   const diagnostics: vscode.Diagnostic[] = [];
   const text = doc.getText();
   let ast: Mnsc;
+
   try {
-    ast = parse(text, { includeLoc: true });
+    ast = parse(text, {
+      includeLoc: true,
+      frontMatterParser: config.diagnostics.validateFrontMatter ? undefined : (_raw) => ({}),
+    });
   } catch (err: unknown) {
     const e = err as { message?: string; location?: { start?: { offset?: number }; end?: { offset?: number } } };
     const message = e?.message ?? 'Parse error';
@@ -26,9 +33,8 @@ export function maybeValidate(doc: vscode.TextDocument, collection: vscode.Diagn
   }
 
   // Additional semantic warnings
-  const cfg = getConfig();
-  if (cfg.diagnostics.warnUnknownFunctions) {
-    const known = new Set((cfg.functions ?? []).map((f) => f.name));
+  if (config.diagnostics.warnUnknownFunctions) {
+    const known = new Set((config.functions ?? []).map((f) => f.name));
     const reserved = new Set(['text', 'label', 'item', 'if']);
     const addWarn = (offsetStart: number | undefined, offsetEnd: number | undefined, name: string) => {
       if (offsetStart == null || offsetEnd == null) return;
@@ -51,6 +57,7 @@ export function maybeValidate(doc: vscode.TextDocument, collection: vscode.Diagn
         for (const c of node) visit(c);
         return;
       }
+
       const name = node.command;
       if (!reserved.has(name) && !known.has(name)) {
         const s = node.loc?.start?.offset as number | undefined;
@@ -66,14 +73,15 @@ export function maybeValidate(doc: vscode.TextDocument, collection: vscode.Diagn
   }
 
   // Unknown character name warnings
-  if (cfg.diagnostics.warnUnknownCharacters || cfg.diagnostics.warnUnknownFaces) {
+  if (config.diagnostics.warnUnknownCharacters || config.diagnostics.warnUnknownFaces) {
     const knownChars = new Map<string, string[] | undefined>();
-    for (const c of cfg.characters ?? []) knownChars.set(c.name, c.faces);
+    for (const c of config.characters ?? []) knownChars.set(c.name, c.faces);
 
     const addWarnAtName = (node: Command, name: string) => {
       const s = node.loc?.start?.offset as number | undefined;
       const e = node.loc?.end?.offset as number | undefined;
       if (s == null || e == null) return;
+
       const slice = text.slice(s, e);
       const idx = slice.indexOf(`${name}:`);
       const startOffset = idx >= 0 ? s + idx : s;
@@ -92,6 +100,7 @@ export function maybeValidate(doc: vscode.TextDocument, collection: vscode.Diagn
       const s = node.loc?.start?.offset as number | undefined;
       const e = node.loc?.end?.offset as number | undefined;
       if (s == null || e == null) return;
+
       const slice = text.slice(s, e);
       const token = `'${face}'`;
       const idx = slice.indexOf(token);
@@ -119,11 +128,11 @@ export function maybeValidate(doc: vscode.TextDocument, collection: vscode.Diagn
         const charName = meta.name;
         const face = meta.face as string | undefined;
         const knownFaces = charName ? knownChars.get(charName) : undefined;
-        if (cfg.diagnostics.warnUnknownCharacters && charName && !knownChars.has(charName)) {
+        if (config.diagnostics.warnUnknownCharacters && charName && !knownChars.has(charName)) {
           addWarnAtName(node, charName);
         }
         if (
-          cfg.diagnostics.warnUnknownFaces &&
+          config.diagnostics.warnUnknownFaces &&
           face &&
           charName &&
           knownFaces &&

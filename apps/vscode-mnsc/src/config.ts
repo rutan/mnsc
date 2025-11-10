@@ -11,7 +11,12 @@ export type MnscConfig = {
   functions: MnscUserFunction[];
   characters: MnscCharacter[];
   generateIds: { onSave: boolean; format: 'uuid' | 'hash' };
-  diagnostics: { warnUnknownFunctions: boolean; warnUnknownCharacters: boolean; warnUnknownFaces: boolean };
+  diagnostics: {
+    warnUnknownFunctions: boolean;
+    warnUnknownCharacters: boolean;
+    warnUnknownFaces: boolean;
+    validateFrontMatter: boolean;
+  };
 };
 
 let cached: MnscConfig | undefined;
@@ -78,6 +83,7 @@ function readConfig(): MnscConfig {
       warnUnknownFunctions: c.get<boolean>('diagnostics.warnUnknownFunctions', false),
       warnUnknownCharacters: c.get<boolean>('diagnostics.warnUnknownCharacters', false),
       warnUnknownFaces: c.get<boolean>('diagnostics.warnUnknownFaces', false),
+      validateFrontMatter: c.get<boolean>('diagnostics.validateFrontMatter', false),
     },
   };
 }
