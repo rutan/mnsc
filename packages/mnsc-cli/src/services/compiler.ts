@@ -15,11 +15,12 @@ export interface CompileResult {
 }
 
 export function compile(content: string, options: CompileOptions = {}): string {
-  const { logger, includeLoc = false, pretty = false } = options;
+  const { logger, includeLoc = false, pretty = false, frontMatterParser } = options;
   try {
     logger?.verbose('Parsing MNSC content...');
     const ast = parse(content, {
       includeLoc,
+      frontMatterParser,
     });
 
     logger?.verbose('Converting to JSON...');
@@ -75,6 +76,7 @@ export function validate(content: string, options: CompileOptions = {}): boolean
   try {
     parse(content, {
       includeLoc: options.includeLoc ?? false,
+      frontMatterParser: options.frontMatterParser,
     });
     return true;
   } catch {

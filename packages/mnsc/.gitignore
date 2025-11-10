@@ -1,2 +1,2 @@
 /dist
-/parser/mnsc-parser.js
+/parser/*.js

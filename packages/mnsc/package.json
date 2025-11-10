@@ -31,7 +31,9 @@
     "build:ts": "tsup src/index.ts --dts --format esm --sourcemap",
     "test": "run-s gen-parser && vitest run",
     "lint": "tsc --noEmit",
-    "gen-parser": "peggy -o parser/mnsc-parser.js --format es parser/mnsc-parser.peggy"
+    "gen-parser": "run-p gen-parser:*",
+    "gen-parser:mnsc": "peggy -o parser/mnsc-parser.js --format es parser/mnsc-parser.peggy",
+    "gen-parser:frontmatter": "peggy -o parser/frontmatter-parser.js --format es parser/frontmatter-parser.peggy"
   },
   "devDependencies": {
     "peggy": "^5.0.6"
