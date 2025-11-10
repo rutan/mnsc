@@ -14,6 +14,7 @@
       : lines.map(line => line.slice(minIndent)).join('\n');
   }
 
+
   function unwrapLiteral(value) {
     if (value && typeof value === 'object' && (
       value.type === 'number' ||
@@ -117,12 +118,12 @@
 }
 
 Start =
-  _ meta:FrontMatter?
+  _ frontMatter:FrontMatter?
   _ commands:(_ command:Command _ { return command; })*
   _ {
     const filteredCommands = commands.filter(Boolean);
     return {
-      meta: meta ?? {},
+      frontMatter: frontMatter ?? null,
       commands: filteredCommands
     };
   }
@@ -133,46 +134,15 @@ Start =
 
 FrontMatter =
   '---' _ Break
-  _ pairs:(_ f:FrontMatterPair _ { return f; })*
+  body:FrontMatterBody?
   _ '---' _ (Break / EOF) {
-    return Object.fromEntries(new Map(pairs));
+    return body ?? '';
   }
 
-FrontMatterPair = key:Identity _ ':' _ value:FrontMatterValue _ (Break / &'---') {
-  return [key, value];
-}
-
-FrontMatterValue = FrontMatterArray / FrontMatterObject / FrontMatterScalar
-
-FrontMatterScalar = value:(NumberLiteral / StringLiteral / BooleanLiteral / NullLiteral / FrontMatterSimpleValue) {
-  return value;
-}
-
-FrontMatterArray = Break items:FrontMatterArrayContent {
-  return items;
-}
-
-FrontMatterArrayContent = items:FrontMatterArrayItem+ {
-  return items;
-}
-
-FrontMatterArrayItem = [ \t]+ '-' [ \t]+ value:FrontMatterValue _ (Break / &'---') {
-  return value;
-}
-
-FrontMatterObject = Break pairs:FrontMatterObjectContent {
-  return Object.fromEntries(pairs);
-}
-
-FrontMatterObjectContent = pairs:FrontMatterObjectPair+ {
-  return pairs;
-}
-
-FrontMatterObjectPair = [ \t]+ key:Identity _ ':' _ value:FrontMatterValue _ (Break / &'---') {
-  return [key, value];
-}
-
-FrontMatterSimpleValue = chars:[^\r\n]+ { return chars.join("").trim(); }
+FrontMatterBody =
+  chars:(!(_ '---' _ (Break / EOF)) c:. { return c; })* {
+    return chars.join('');
+  }
 
 // --------------------------------------------------------
 // Command

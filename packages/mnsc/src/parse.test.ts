@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import { parse } from './parse';
 
 describe('parse', () => {
@@ -86,6 +86,32 @@ Hello world
       expect(ifCommand).not.toHaveProperty('loc');
       expect(ifCommand.branches[0].children[0]).not.toHaveProperty('loc');
       expect(ifCommand.branches[0].children[1]).not.toHaveProperty('loc');
+    });
+  });
+
+  describe('frontMatterParser option', () => {
+    const mnscCode = `
+---
+title: default
+---
+Hello world
+    `.trim();
+
+    test('allows custom parser implementation', () => {
+      const spy = vi.fn<(raw: string) => { title: string }>(() => ({ title: 'custom' }));
+      const result = parse(mnscCode, { frontMatterParser: spy });
+
+      expect(spy).toHaveBeenCalledTimes(1);
+      const firstCall = spy.mock.calls.at(0);
+      expect(firstCall).toBeDefined();
+      expect(firstCall?.[0]).toContain('title: default');
+      expect(result.meta).toEqual({ title: 'custom' });
+    });
+
+    test('skips parser invocation when front matter is absent', () => {
+      const spy = vi.fn<(raw: string) => Record<string, never>>(() => ({}));
+      parse('Hello world', { frontMatterParser: spy });
+      expect(spy).not.toHaveBeenCalled();
     });
   });
 });

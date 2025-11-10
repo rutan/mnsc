@@ -1,18 +1,42 @@
+import { parse as parseFrontMatter } from '../parser/frontmatter-parser';
 import { parse as parseMnsc } from '../parser/mnsc-parser';
 import type { Mnsc } from './types';
 
+export type FrontMatterParser = (raw: string) => Record<string, unknown>;
+
 export type ParseOptions = {
   includeLoc?: boolean;
+  frontMatterParser?: FrontMatterParser;
+};
+
+type ParserResult = {
+  frontMatter: string | null;
+  commands: Mnsc['commands'];
+};
+
+const defaultFrontMatterParser: FrontMatterParser = (raw) => {
+  if (!raw || !raw.trim()) {
+    return {};
+  }
+  return parseFrontMatter(raw);
 };
 
 export function parse(mnscCode: string, options: ParseOptions = {}): Mnsc {
-  const result = parseMnsc(mnscCode);
+  const { frontMatterParser = defaultFrontMatterParser } = options;
+  const result = parseMnsc(mnscCode) as ParserResult;
+
+  const meta = result.frontMatter !== null ? frontMatterParser(result.frontMatter) : {};
+
+  const parsed: Mnsc = {
+    meta,
+    commands: result.commands,
+  };
 
   if (!options.includeLoc) {
-    removeLoc(result);
+    removeLoc(parsed);
   }
 
-  return result as Mnsc;
+  return parsed;
 }
 
 // biome-ignore lint/suspicious/noExplicitAny: recursive object processing

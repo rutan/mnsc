@@ -218,6 +218,11 @@
           "type": "boolean",
           "default": false,
           "description": "Warn when a face value is not listed for the given character in mnsc.characters[].faces."
+        },
+        "mnsc.diagnostics.validateFrontMatter": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use the built-in FrontMatter parser during validation. Disable (default) if your project uses a custom FrontMatter format."
         }
       }
     }
