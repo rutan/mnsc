@@ -4,7 +4,12 @@ import { insertIdsUsingLoc, parse } from '@rutan/mnsc';
 export function tryInsertIds(content: string, format: 'uuid' | 'hash', filePath?: string): string | undefined {
   let ast: Mnsc;
   try {
-    ast = parse(content, { includeLoc: true });
+    ast = parse(content, {
+      includeLoc: true,
+
+      // skip front matter parsing
+      frontMatterParser: () => ({}),
+    });
   } catch {
     return undefined;
   }
