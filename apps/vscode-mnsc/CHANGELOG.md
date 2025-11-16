@@ -1,5 +1,11 @@
 # @rutan/vscode-mnsc
 
+## 0.3.1
+
+### Patch Changes
+
+- [#11](https://github.com/rutan/mnsc/pull/11) [`a85ca63`](https://github.com/rutan/mnsc/commit/a85ca63eced4bd72a85c9bb3047ba4547881f95a) Thanks [@rutan](https://github.com/rutan)! - skip frontmatter parse on generate ids
+
 ## 0.3.0
 
 ### Minor Changes
